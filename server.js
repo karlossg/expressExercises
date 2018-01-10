@@ -17,4 +17,14 @@ app.delete('/del_user', (req, res) => {
   res.send('Hello DELETE!');
 });
 
+app.get('/list_user', (req, res) => {
+  console.log('I got GET request to /list_user');
+  res.send('Users list');
+});
+
+app.get('/ab*cd', (req, res) => {
+  console.log('I got GET request to /ab*cd');
+  res.send('its a match');
+});
+
 server = app.listen(3000, () => console.log('server listening on: http://localhost:3000'));
