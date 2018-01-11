@@ -1,30 +1,23 @@
 const express = require('express');
-
 const app = express();
+const fs = require('fs');
 
-app.get('/', (req, res) => {
-  console.log('I got GET request to main page');
-  res.send('Hello GET');
+let stringifyFile;
+
+app.get('/getNote', (req, res) => {
+  fs.readFile('./test.json', 'utf8', (err, data) => {
+    if (err) throw err;
+    stringifyFile = data;
+    res.send(data);
+  });
 });
 
-app.post('/', (req, res) => {
-  console.log('I got POST request to main page');
-  res.send('Hello POST!');
+app.use('/updateNote/:note', (req, res) => {
+  stringifyFile = req.params.note;
+  fs.appendFile('./test.json', stringifyFile, err => {
+    if (err) throw err;
+    console.log('file updated');
+  });
 });
 
-app.delete('/del_user', (req, res) => {
-  console.log('I got DELETE request to /del_user');
-  res.send('Hello DELETE!');
-});
-
-app.get('/list_user', (req, res) => {
-  console.log('I got GET request to /list_user');
-  res.send('Users list');
-});
-
-app.get('/ab*cd', (req, res) => {
-  console.log('I got GET request to /ab*cd');
-  res.send('its a match');
-});
-
-server = app.listen(3000, () => console.log('server listening on: http://localhost:3000'));
+app.listen(3000);
