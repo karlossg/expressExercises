@@ -13,7 +13,7 @@ app.get('/', (req, res) => res.send('Hello world!'));
 
 app.get('/store', (req, res) => res.send('This is shop'));
 
-app.get('/first-template', (req, res) => res.render('first-template'));
+app.get('/content', (req, res) => res.render('content'));
 
 app.listen(3000);
 
