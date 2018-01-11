@@ -17,6 +17,7 @@ app.use('/updateNote/:note', (req, res) => {
   fs.appendFile('./test.json', stringifyFile, err => {
     if (err) throw err;
     console.log('file updated');
+    res.end();
   });
 });
 
