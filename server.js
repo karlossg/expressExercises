@@ -13,6 +13,8 @@ app.get('/', (req, res) => res.send('Hello world!'));
 
 app.get('/store', (req, res) => res.send('This is shop'));
 
+app.get('/first-template', (req, res) => res.render('first-template'));
+
 app.listen(3000);
 
 app.use((req, res, next) => res.status(404).send('404! Page not found!'));
