@@ -1,21 +1,15 @@
 const express = require('express');
 const app = express();
 
-app.use(express.static('assets'));
-
-app.get('/', (req, res) => res.sendFile('/index.html'));
-
-app.get('/userform', (req, res) => {
-  const response = {
-    first_name: req.query.first_name,
-    last_name: req.query.last_name
-  };
-  res.end(JSON.stringify(response));
+app.use('/store', (req, res, next) => {
+  console.log('Im middleware to /store');
+  next();
 });
 
-const server = app.listen(3000, 'localhost', () => {
-  const host = server.address().address;
-  const port = server.address().port;
+app.get('/', (req, res) => res.send('Hello world!'));
 
-  console.log('app is listening on http://' + host + ':' + port);
-});
+app.get('/store', (req, res) => res.send('This is shop'));
+
+app.listen(3000);
+
+app.use((req, res, next) => res.status(404).send('404! Page not found!'));
