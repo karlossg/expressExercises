@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views', './views');
+
 app.use('/store', (req, res, next) => {
   console.log('Im middleware to /store');
   next();
