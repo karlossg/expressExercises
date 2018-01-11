@@ -6,6 +6,17 @@ app.use('/store', (req, res, next) => {
   next();
 });
 
+app.use(
+  '/auth',
+  (req, res, next) => {
+    console.log('user authorisation');
+    next();
+  },
+  (req, res) => {
+    console.log('checking permissions');
+  }
+);
+
 app.get('/', (req, res) => res.send('Hello world!'));
 
 app.get('/store', (req, res) => res.send('This is shop'));
